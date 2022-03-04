@@ -1,0 +1,14 @@
+
+<!-- Using Bootstrap Media Object here for the social media kind of view -->
+<div 
+    *ngFor="let follower of followers"
+    class="media">
+    <div class="media-left">
+        <img class="avatar mr-3" src="{{follower.avatar_url}}" alt="followers_img">
+    </div>
+    
+    <div class="media-body">
+      <h5 class="mt-0">{{follower.login}}</h5>
+      <a href="{{follower.html_url}}">{{follower.html_url}}</a>
+    </div>
+  </div>
