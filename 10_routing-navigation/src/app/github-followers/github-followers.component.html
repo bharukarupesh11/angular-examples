@@ -1,0 +1,31 @@
+
+<!-- Using Bootstrap Media Object here for the social media kind of view -->
+<div *ngFor="let follower of followers" class="media">
+    <div class="media-left">
+        <img class="avatar mr-3" src="{{follower.avatar_url}}" alt="followers_img">
+    </div>
+    
+    <div class="media-body">
+      <h5 class="media-heading">
+        <!-- Here, we've used the property binding syntax because the id paramer should be rendered dynamically. -->
+        <a [routerLink]="['/followers', follower.login, follower.id]">{{follower.login}}</a> <!-- route with Multiple Parameters -->
+      </h5>
+      <a href="{{follower.html_url}}">{{follower.html_url}}</a>
+    </div>
+</div>
+
+<!-- 
+  Syntax:
+    [propertyBinding]="['path', route_parameter]"
+
+  Eg:
+    [routerLink]="['/followers', follower.id]"
+
+  Router Link:
+    1. For simple routes we can use a “routerLink” directive as an attribute and set it to a string value.
+          Eg. <a routerLink=”/followers”>
+    2. If you’re dealing with the route parameters, “use the property binding syntax” and set the value of 
+        this property to an array and the first element in this array is the path and the subsequent elements 
+        are the route arguments.
+          Eg. <a [routerLink]=”[‘followers’, follower.id]”>
+  -->
