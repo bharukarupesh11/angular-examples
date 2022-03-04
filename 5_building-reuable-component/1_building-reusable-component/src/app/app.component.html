@@ -1,0 +1,22 @@
+<h1>Angular</h1>
+
+<!-- onFavoriteChanged() method will get called once the emit() method of change property raises an event. -->
+<favorite [is-favorite]="post.isFavorite" (change)="onFavoriteChanged($event)"></favorite>
+
+<span class="glyphicon glyphicon-user"></span>
+
+
+<bootstrap-panel>
+    <!-- <div class="heading">Heading</div> --> <!-- At runtime angular renders the Heading content inside this div so an extra div is added in the panel component heading div which we've removed using ngContainer element. -->
+    <ng-container class="heading">Heading</ng-container>
+    <div class="body">
+        <h2>Body</h2>
+        <p>Some content here...</p>
+    </div>
+</bootstrap-panel>
+
+<!-- Exercise -->
+<like 
+    [likesCount]="tweet.likesCount"
+    [isActive]="tweet.isLiked"
+></like>
