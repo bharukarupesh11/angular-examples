@@ -1,0 +1,137 @@
+<h1>Angular</h1>
+
+<!-- Old approach 
+     Note: If any of the condition evaluates to true then that element will be added to the DOM
+           and the other element will be removed from the DOM.
+
+<div *ngIf="courses.length > 0">
+    List of courses
+</div>
+
+<div *ngIf="courses.length == 0">
+    No courses yet
+</div> 
+-->
+
+
+<!-- Angular 4 Syntax: If else like approach 
+<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+
+<ng-template #coursesList>
+    List of courses: {{courses.length}}
+</ng-template>
+
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+-->
+
+<!-- Hidden attribute approach: Property Binding kind of syntax is used here. -->
+<div [hidden]="courses.length == 0">
+    List of courses
+</div>
+
+<div [hidden]="courses.length > 0">
+    No courses yet
+</div>
+
+
+<br/>
+<br/>
+
+<!-- ngSwitchCase Example -->
+<h1>ngSwitchCase Example</h1>
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'">
+        <a (click)="viewMode = 'map'">Map View</a>
+    </li>
+    <li [class.active]="viewMode == 'list'">
+        <a (click)="viewMode = 'list'">List View</a>
+    </li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map view content</div>
+    <div *ngSwitchCase="'list'">List view content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<br/>
+<br/>
+
+<!-- ngFor Example -->
+<h1>ngFor Example</h1>
+<ul>
+    <li *ngFor="let book of books; index as i">
+        {{ i }} - {{ book.name}}
+    </li>
+</ul>
+
+
+<br/>
+<br/>
+
+<!-- ngFor and Change Detection Example -->
+<h1>ngFor and Change Detection Example</h1>
+<button (click)="onAdd()">Add</button>
+<ul>
+    <li *ngFor="let employee of employees">
+        {{employee.name}} 
+        <button (click)="onRemove(employee)">Remove</button>
+        <button (click)="onChange(employee)">Update</button>
+    </li>
+</ul>
+
+<br/>
+<br/>
+
+<!-- ngFor and trackBy Example -->
+<h1>ngFor and Track By Example</h1>
+<button (click)="loadEmployees()">Load Employees</button>
+<ul>
+    <li *ngFor="let employee of employees2;  trackBy: trackEmployees"> <!-- Here, we've added the name of the method i.e. "trackEmployees" as a reference instead of calling the method itself -->
+        {{ employee.name }}
+    </li>
+</ul>
+
+<br/>
+<br/>
+
+<!-- ngClass Example: Look at favorite.component.html file -->
+<h1>ngClass Example</h1>
+<favorite></favorite>
+
+
+<br/>
+<br/>
+
+<!-- Style binding approach: Replace this with ngStyle directive -->
+<!-- <button
+    [style.backgroundColor]="canSave ? 'blue': 'gray'"
+    [style.color]="canSave ? 'white': 'black'"
+    [style.fontWeight]="canSave ? 'bold': 'normal'"
+>Save</button> -->
+
+<h1>ngStyle Example</h1>
+<button
+    [ngStyle]="{
+        'backgroundColor': canSave ? 'blue': 'gray',
+        'color': canSave ? 'white': 'black'
+    }"
+>Save</button>
+
+<br/>
+<br/>
+<!-- Custom Directive Example -->
+<h1>Custom Directive Example</h1>
+<input type="text" appInputFormat [format]="'uppercase'">
+
+
+<br/>
+<br/>
+<!-- Exercise -->
+<h1>Exercise</h1>
+<zippy title="Shipping Details">
+    Shipping Details Content
+</zippy>
+
