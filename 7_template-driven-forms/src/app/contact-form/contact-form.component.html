@@ -1,0 +1,110 @@
+
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup="contact" #contact="ngModelGroup">
+        <div class="form-group">
+                <!-- We've used the input field id for the "for" attribute of our label so that when we click "First Name" label then our input field is automatically focused -->
+                <label for="firstName">First Name</label>
+                <input 
+                    required 
+                    minlength="3" 
+                    maxlength="10" 
+                    pattern="banana" 
+                    ngModel 
+                    name="firstName" 
+                    #firstName="ngModel" 
+                    (change)="log(firstName)" 
+                    type="text" 
+                    id="firstName" 
+                    class="form-control">
+
+                <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                    <div *ngIf="firstName.errors.required">
+                        First Name is required.
+                    </div>
+                    <div *ngIf="firstName.errors.minlength">
+                        First name should be min. {{ firstName.errors.minlength.requiredLength }} characters long.
+                    </div>
+                    <div *ngIf="firstName.errors.pattern">
+                        First name doesn't match the pattern.
+                    </div>
+                </div>
+        </div>
+        <!-- We could also have the related input fields here like lastName, phone number, email etc. -->
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+
+    <!-- Checkbox example -->
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ngModel name="isSubscribed">
+            Subscribe to mailing list
+        </label>
+    </div>
+
+    <!-- Drop down list example -->
+    <div class="form-group">
+        <label for="contactMethod">Contact Method</label>
+        <select ngModel name="contactMethod" id="contactMethod" class="form-control">
+            <option *ngFor="let method of contactMethods" [value]="method.id">
+                {{ method.name }}
+            </option>
+
+            <!-- ngValue is an attribute directive that we can bind with the object : Look at the json below to see the object of selected value in dropdown list -->
+            <!-- <option *ngFor="let method of contactMethods" [ngValue]="method">
+                {{ method.name }}
+            </option> -->
+        </select>
+    </div>
+
+    <!-- Hard Coded Values:
+    <div class="radio">
+        <label>
+            <input ngModel type="radio" name="contactMethod" value="1">
+            Email
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input ngModel type="radio" name="contactMethod" value="2">
+            Phone
+        </label>
+    </div> -->
+
+    <!-- Radio button example: Dynamically Extracting Values -->
+    <div class="radio" *ngFor="let method of contactMethods">
+        <label>
+            <input type="radio" ngModel name="contactMethod" [value]="method.id">
+            {{ method.name }}
+        </label>
+    </div>
+
+    <p>
+        {{ f.value | json }}
+    </p>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
+
+<!-- 
+    With template driven approach we apply a directive to our input field to add the validation to it. 
+    And the directive name is 'ngModel' (Banana in a box approach).
+
+    Two Way Binding Syntax:
+    [(ngModel)]="firstName" : Binding ngModel directive to a field name of our component class. 
+
+    But, here we don't need a two way binding so we've simply written "ngModel" in our input field.
+    When we apply "ngModel" directive to an input field angular will create a control object and associate 
+    it with input field under the hood. 
+
+    To use the template driven approach, below are the two attributes we need to set in our input field,
+        ngModel name="firstName"
+
+    #firstName="ngModel": This is a template variable. And it's value is set to ngModel directive.
+
+    (change)="log(firstName)": Handling the change event of this input field and call the log method on it. 
+-->
+
