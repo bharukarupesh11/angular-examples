@@ -1,0 +1,13 @@
+
+<span 
+    class="glyphicon"
+    [class.glyphicon-star]="isFavorite"
+    [class.glyphicon-star-empty]="!isFavorite"
+    (click)="onClick()"
+></span>
+
+<br/>
+<!-- This example is kept on hold. Not working as per the expected result. -->
+<input type="text" [(ngModel)]="title">
+<br/>
+{{ title | titleCase }}

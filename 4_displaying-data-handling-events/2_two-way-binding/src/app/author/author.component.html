@@ -1,0 +1,49 @@
+<h2>{{ authors.length }} Authors</h2>
+<ul>
+    <li *ngFor="let author of authors">
+        {{ author }}
+    </li>
+</ul>
+
+
+<!-- Bootstrap Example -->
+<button class="btn btn-primary">Save</button>
+
+
+<!-- Two way binding: Banana in a box syntax. I've added 'FormsModule' inside imports section of "app.module.ts" -->
+<input [(ngModel)]="email" (keyup.enter)="twoWayBinding()" />
+
+
+<!-- Two way Binding
+    Note:
+    We get the below error when we run the above 2 way binding example,
+        "Can't bind to ngModel since it isn't a known property of input" 
+        
+    This is because, angular framework consists of several different modules. In every module we've 
+    a bunch of building blocks that are highly related. We've component, directives and pipes that are 
+    highly related. 
+
+    Now, not every application needs all the modules in angular. Because when you bring all these modules 
+    you increase the code size. So, this ngModel directive is defined in one of the modules called 'forms'
+    and by default this is not imported in your application. So, if you want to use ngModel or if you want 
+    to build any kind of forms, you need to explicitely import this module. 
+    
+    So, how do we do that?
+    go to the "app.module.ts" module file and in the imports section import "FormsModule".
+-->
+
+
+<!-- Built in Pipes Example : To get all the pipe formats, visit: angular.io and in the search box search it. -->
+<br/>
+Name: {{ author.name | uppercase }} <br/>
+Book Title: {{ author.book | lowercase }} <br/>
+Total Books: {{ author.noOfBooks | number }} <br/>
+Author Rating: {{ author.rating | number:'1.2-2'}} <br/> <!--1 means only one digit before decimal point and 2-2 means min. and max. 2 digits after decimal point -->
+Book Price: {{ author.bookPrice | currency:'AUD':true:'3.2-2' }} <br/>
+Book Release Date: {{ author.releaseDate | date:'shortDate' }} <br/>
+
+
+<!-- Custom Pipes -->
+{{ text | summary:10 }} <!-- Passing parameter to our SummaryPipe transform() method -->
+
+<br/>

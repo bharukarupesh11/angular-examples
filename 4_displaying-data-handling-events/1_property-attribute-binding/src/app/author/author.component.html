@@ -1,0 +1,48 @@
+<h2>{{ authors.length }} Authors</h2> <!-- String Interpolation or Data Binding -->
+<ul>
+    <li *ngFor="let author of authors"> <!-- ngFor Directive of angular available in BrowserModule of angular module -->
+        {{ author }}
+    </li>
+</ul>
+
+<!-- String interpolation syntax : Behind the scene angular converts this to below property binding syntax -->
+<img src="{{imgUrl}}" style="width: 200px;"/>
+
+<!-- Property Binding Example -->
+<img [src]="imgUrl" style="width: 200px;"/>
+
+
+<!-- Attribute Binding Example -->
+<table>
+    <tr>
+        <td [attr.colspan]="colSpan"> Testing Attribute Binding </td>
+    </tr>
+</table>
+
+
+<!-- Bootstrap Example -->
+<button class="btn btn-primary">Save</button>
+
+<!-- Class Binding Example: Right click on the button and inspect the element to test the changes -->
+<button class="btn btn-warning" [class.active]="isActive">Next</button>
+
+
+<!-- Style Binding Example -->
+<button [style.backgroundColor]="isActive ? 'red' : 'white'"> Continue </button>  
+
+<!-- Event Binding -->
+<div (click)="onDivClicked()">
+    <button (click)="onSave($event)"> Save! </button>    
+</div>
+
+<!-- Event Filtering: Old approach -->
+<!-- <input (keyup)="onKeyUp($event)" /> -->
+
+<!-- Event Filtering: New approach-->
+<input (keyup.enter)="onKeyUp()" />
+
+<!-- Template Variables: OLD approach -->
+<!-- <input (keyup)="onKeyEnter($event)" /> -->
+
+<!-- Template Variables: New approach. Here, we've declared the variable email with '#' symbol -->
+<input #email (keyup.enter)="onKeyEnter(email.value)" />
