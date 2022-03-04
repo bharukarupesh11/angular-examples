@@ -1,0 +1,16 @@
+<form>
+    <input 
+        formControlName="name"
+        type="text">
+    
+    <div formGroupName="contact">
+        <input formControlName="email" type="text">
+        <input formControlName="phone" type="text">
+    </div>
+
+    <ul>
+        <li *ngFor="let topic of topics.controls">
+            {{ topic.value }}
+        </li>
+    </ul>
+</form>

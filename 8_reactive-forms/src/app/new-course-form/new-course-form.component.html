@@ -1,0 +1,18 @@
+<form>
+    <input 
+        type="text" 
+        class="form-control"
+        #topic
+        (keyup.enter)="addTopic(topic)">
+
+    <!-- list-group and list-group-item is a bootstrap class -->
+    <ul class="list-group">
+        <!-- we've a property called controls using which we can iterate over all the form control objects inside this array  -->
+        <li 
+            *ngFor="let topic of topics.controls" 
+            (click)="removeTopic(topic)"
+            class="list-group-item">
+            {{ topic.value }}
+        </li>
+    </ul>
+</form>

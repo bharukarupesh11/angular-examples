@@ -1,0 +1,42 @@
+<!-- Note: 
+    1. formGroup object is associated with the field name in our component class i.e. "form"
+    2. We've a directive called ngForm which is applied to all form element by default and this exposes the output property called ngSubmit which we can use to bind the submit event. -->
+<form [formGroup]="form" (ngSubmit)="login()"> <!-- name of our FormGroup property in the component class -->
+    <div *ngIf="form.errors" class="alert alert-danger">
+        The username or password is invalid. 
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            formControlName="username" 
+            type="text" 
+            id="username" 
+            class="form-control">
+
+        <!-- Added loader image or message till async operation is pending. Our formControl object has a property called "pending" and this property returns true if at least one async validator is in progress. -->
+        <div *ngIf="username.pending">Checking for uniqueness...</div>
+
+        <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+            <div *ngIf="username.errors.required">Username is required.</div>
+            <div *ngIf="username.errors.minlength">Username should be min. {{ username.errors.minlength.requiredLength }} characters long.</div>
+            <div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
+
+            <!-- this validation is going to take 2 seconds because of our setTimeout async method -->
+            <div *ngIf="username.errors.shouldBeUnique">Username is already taken.</div>
+        </div>
+    </div>    
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            formControlName="password"
+            type="password" 
+            id="password" 
+            class="form-control">
+
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">Password is required.</div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Sign up</button>
+</form>
